@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Todo App</title>
+</head>
+
+<body>
+
+    <h1>Todo App</h1>
+
+    <form method="POST" action="/add_task">
+
+        <label>Task Name:</label>
+
+        <input type="text"
+               name="task_name"
+               required>
+
+        <button type="submit">
+            Add Task
+        </button>
+
+    </form>
+
+    <br>
+
+    <table border="1" cellpadding="10">
+
+        <tr>
+            <th>Task Name</th>
+            <th>Completed At</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+
+        {% for task in tasks %}
+
+        <tr>
+
+            <td>{{ task.task_name }}</td>
+
+            <td>{{ task.completed_at }}</td>
+
+            <td>{{ task.status }}</td>
+
+            <td>
+
+                {% if task.status == "Pending" %}
+
+                <a href="/complete/{{ loop.index0 }}">
+                    Complete
+                </a>
+
+                {% else %}
+
+                Done
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</body>
+
+</html>
